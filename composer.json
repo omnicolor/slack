@@ -26,8 +26,16 @@
     "require": {
         "php": "^8.3"
     },
-    "require-dev": {},
-    "scripts": {},
-    "scripts-descriptions": {},
+    "require-dev": {
+        "phpunit/phpunit": "^11.2"
+    },
+    "scripts": {
+        "coverage": "XDEBUG_MODE=coverage phpunit --coverage-html=vendor/coverage",
+        "test": "phpunit"
+    },
+    "scripts-descriptions": {
+        "coverage": "Run all tests and create a code coverage report in vendor/coverage",
+        "test": "Run all tests"
+    },
     "type": "library"
 }
