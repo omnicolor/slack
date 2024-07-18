@@ -27,6 +27,7 @@
         "php": "^8.3"
     },
     "require-dev": {
+        "php-parallel-lint/php-parallel-lint": "^1.4",
         "phpstan/phpstan": "^1.11",
         "phpstan/phpstan-deprecation-rules": "^1.2",
         "phpstan/phpstan-phpunit": "^1.4",
@@ -34,17 +35,25 @@
         "phpunit/phpunit": "^11.2"
     },
     "scripts": {
+        "all": [
+            "@lint",
+            "@phpstan",
+            "@coverage"
+        ],
         "coverage": "XDEBUG_MODE=coverage phpunit --coverage-html=vendor/coverage",
+        "lint": "parallel-lint --colors src tests",
         "phpstan": "phpstan analyze",
         "static": [
+            "@lint",
             "@phpstan"
         ],
         "test": "phpunit"
     },
     "scripts-descriptions": {
+        "all": "Run static and style checks, then code coverage",
         "coverage": "Run all tests and create a code coverage report in vendor/coverage",
         "phpstan": "Run PHPstan",
-        "static": "Run static analysis (PHPStan)",
+        "static": "Run static analysis (Lint and PHPStan)",
         "test": "Run all tests"
     },
     "type": "library"
