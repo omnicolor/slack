@@ -1,0 +1,33 @@
+{
+    "authors": [
+        {
+            "name": "Omni Adams",
+            "email": "omni@digitaldarkness.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Omnicolor\\Slack\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "description": "Library for creating Slack messages",
+    "name": "omnicolor/slack",
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "require": {
+        "php": "^8.3"
+    },
+    "require-dev": {},
+    "scripts": {},
+    "scripts-descriptions": {},
+    "type": "library"
+}
