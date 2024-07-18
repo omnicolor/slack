@@ -34,22 +34,26 @@
         "phpstan/phpstan-phpunit": "^1.4",
         "phpstan/phpstan-strict-rules": "^1.6",
         "phpunit/phpunit": "^11.2",
-        "roave/security-advisories": "dev-latest"
+        "roave/security-advisories": "dev-latest",
+        "vimeo/psalm": "dev-master"
     },
     "scripts": {
         "all": [
             "@lint",
             "@php-cs-fixer",
             "@phpstan",
+            "@psalm",
             "@coverage"
         ],
         "coverage": "XDEBUG_MODE=coverage phpunit --coverage-html=vendor/coverage",
         "lint": "parallel-lint --colors src tests",
         "php-cs-fixer": "php-cs-fixer fix --dry-run --config=php_cs.php -v --diff",
         "phpstan": "phpstan analyze",
+        "psalm": "psalm",
         "static": [
             "@lint",
-            "@phpstan"
+            "@phpstan",
+            "@psalm"
         ],
         "style": [
             "@php-cs-fixer"
@@ -59,8 +63,10 @@
     "scripts-descriptions": {
         "all": "Run static and style checks, then code coverage",
         "coverage": "Run all tests and create a code coverage report in vendor/coverage",
+        "lint": "Run lint across code to make sure it's syntactically valid",
         "phpstan": "Run PHPstan",
-        "static": "Run static analysis (Lint and PHPStan)",
+        "psalm": "Run Psalm",
+        "static": "Run static analysis (Lint, Psalm, and PHPStan)",
         "style": "Run style checks (php-cs-fixer)",
         "test": "Run all tests"
     },
