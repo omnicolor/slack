@@ -35,11 +35,13 @@
         "phpstan/phpstan-strict-rules": "^1.6",
         "phpunit/phpunit": "^11.2",
         "roave/security-advisories": "dev-latest",
+        "squizlabs/php_codesniffer": "^3.10",
         "vimeo/psalm": "dev-master"
     },
     "scripts": {
         "all": [
             "@lint",
+            "@phpcs",
             "@php-cs-fixer",
             "@phpstan",
             "@psalm",
@@ -48,6 +50,7 @@
         "coverage": "XDEBUG_MODE=coverage phpunit --coverage-html=vendor/coverage",
         "lint": "parallel-lint --colors src tests",
         "php-cs-fixer": "php-cs-fixer fix --dry-run --config=php_cs.php -v --diff",
+        "phpcs": "phpcs -p --colors --cache",
         "phpstan": "phpstan analyze",
         "psalm": "psalm",
         "static": [
@@ -56,6 +59,7 @@
             "@psalm"
         ],
         "style": [
+            "@phpcs",
             "@php-cs-fixer"
         ],
         "test": "phpunit"
@@ -67,7 +71,7 @@
         "phpstan": "Run PHPstan",
         "psalm": "Run Psalm",
         "static": "Run static analysis (Lint, Psalm, and PHPStan)",
-        "style": "Run style checks (php-cs-fixer)",
+        "style": "Run style checks (PHP_Codesniffer and php-cs-fixer)",
         "test": "Run all tests"
     },
     "type": "library"
