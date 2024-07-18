@@ -27,6 +27,7 @@
         "php": "^8.3"
     },
     "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.59",
         "php-parallel-lint/php-parallel-lint": "^1.4",
         "phpstan/phpstan": "^1.11",
         "phpstan/phpstan-deprecation-rules": "^1.2",
@@ -38,15 +39,20 @@
     "scripts": {
         "all": [
             "@lint",
+            "@php-cs-fixer",
             "@phpstan",
             "@coverage"
         ],
         "coverage": "XDEBUG_MODE=coverage phpunit --coverage-html=vendor/coverage",
         "lint": "parallel-lint --colors src tests",
+        "php-cs-fixer": "php-cs-fixer fix --dry-run --config=php_cs.php -v --diff",
         "phpstan": "phpstan analyze",
         "static": [
             "@lint",
             "@phpstan"
+        ],
+        "style": [
+            "@php-cs-fixer"
         ],
         "test": "phpunit"
     },
@@ -55,6 +61,7 @@
         "coverage": "Run all tests and create a code coverage report in vendor/coverage",
         "phpstan": "Run PHPstan",
         "static": "Run static analysis (Lint and PHPStan)",
+        "style": "Run style checks (php-cs-fixer)",
         "test": "Run all tests"
     },
     "type": "library"
