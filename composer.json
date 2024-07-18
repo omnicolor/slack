@@ -19,7 +19,8 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "allow-plugins": {
-            "captainhook/captainhook-phar": true
+            "captainhook/captainhook-phar": true,
+            "captainhook/hook-installer": true
         }
     },
     "description": "Library for creating Slack messages",
@@ -31,6 +32,7 @@
     },
     "require-dev": {
         "captainhook/captainhook-phar": "^5.23",
+        "captainhook/hook-installer": "^1.0",
         "friendsofphp/php-cs-fixer": "^3.59",
         "php-parallel-lint/php-parallel-lint": "^1.4",
         "phpstan/phpstan": "^1.11",
