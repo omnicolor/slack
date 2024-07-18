@@ -32,7 +32,8 @@
         "phpstan/phpstan-deprecation-rules": "^1.2",
         "phpstan/phpstan-phpunit": "^1.4",
         "phpstan/phpstan-strict-rules": "^1.6",
-        "phpunit/phpunit": "^11.2"
+        "phpunit/phpunit": "^11.2",
+        "roave/security-advisories": "dev-latest"
     },
     "scripts": {
         "all": [
