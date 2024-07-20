@@ -10,9 +10,9 @@ use Stringable;
 /**
  * @psalm-api
  */
-class UsersSelect extends Block implements JsonSerializable, Stringable
+class MultiConversationsSelect extends Block implements JsonSerializable, Stringable
 {
-    public const string TYPE_USERS_SELECT = 'users_select';
+    public const string TYPE_MULTI_CONVERSATIONS_SELECT = 'multi_conversations_select';
 
     public function __construct(
         protected string $text,
@@ -49,7 +49,7 @@ class UsersSelect extends Block implements JsonSerializable, Stringable
                 'text' => $this->text,
             ],
             'accessory' => [
-                'type' => self::TYPE_USERS_SELECT,
+                'type' => self::TYPE_MULTI_CONVERSATIONS_SELECT,
                 'placeholder' => [
                     'type' => self::TYPE_TEXT,
                     'text' => $this->placeholder_text,

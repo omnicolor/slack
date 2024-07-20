@@ -10,14 +10,15 @@ use Stringable;
 /**
  * @psalm-api
  */
-class UsersSelect extends Block implements JsonSerializable, Stringable
+class Button extends Block implements JsonSerializable, Stringable
 {
-    public const string TYPE_USERS_SELECT = 'users_select';
+    public const string TYPE_BUTTON = 'button';
 
     public function __construct(
         protected string $text,
+        protected string $button_text,
+        protected string $value,
         protected string $action_id,
-        protected string $placeholder_text,
         protected bool $emoji = true,
     ) {
     }
@@ -31,11 +32,12 @@ class UsersSelect extends Block implements JsonSerializable, Stringable
      *   },
      *   accessory: array{
      *     type: string,
-     *     placeholder: array{
+     *     text: array{
      *       type: string,
      *       text: string,
      *       emoji: bool
      *     },
+     *     value: string,
      *     action_id: string
      *   }
      * }
@@ -49,12 +51,13 @@ class UsersSelect extends Block implements JsonSerializable, Stringable
                 'text' => $this->text,
             ],
             'accessory' => [
-                'type' => self::TYPE_USERS_SELECT,
-                'placeholder' => [
+                'type' => self::TYPE_BUTTON,
+                'text' => [
                     'type' => self::TYPE_TEXT,
-                    'text' => $this->placeholder_text,
+                    'text' => $this->button_text,
                     'emoji' => $this->emoji,
                 ],
+                'value' => $this->value,
                 'action_id' => $this->action_id,
             ],
         ];

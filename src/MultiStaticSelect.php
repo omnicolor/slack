@@ -6,20 +6,38 @@ namespace Omnicolor\Slack;
 
 use JsonSerializable;
 use Stringable;
+use UnexpectedValueException;
+
+use function array_values;
 
 /**
  * @psalm-api
  */
-class UsersSelect extends Block implements JsonSerializable, Stringable
+class MultiStaticSelect extends StaticSelect implements JsonSerializable, Stringable
 {
-    public const string TYPE_USERS_SELECT = 'users_select';
+    public const string TYPE_MULTI_SELECT = 'multi_static_select';
 
+    /**
+     * @param array<int, Option> $options
+     * @phpstan-ignore constructor.missingParentCall
+     */
     public function __construct(
         protected string $text,
         protected string $action_id,
         protected string $placeholder_text,
+        protected array $options = [],
         protected bool $emoji = true,
     ) {
+        foreach ($options as $option) {
+            /** @psalm-suppress RedundantConditionGivenDocblockType */
+            if ($option instanceof Option) {
+                continue;
+            }
+            // @phpstan-ignore deadCode.unreachable
+            throw new UnexpectedValueException(
+                'MultiStaticSelect options must be an Option',
+            );
+        }
     }
 
     /**
@@ -36,6 +54,7 @@ class UsersSelect extends Block implements JsonSerializable, Stringable
      *       text: string,
      *       emoji: bool
      *     },
+     *     options: array<int, Option>,
      *     action_id: string
      *   }
      * }
@@ -49,12 +68,13 @@ class UsersSelect extends Block implements JsonSerializable, Stringable
                 'text' => $this->text,
             ],
             'accessory' => [
-                'type' => self::TYPE_USERS_SELECT,
+                'type' => self::TYPE_MULTI_SELECT,
                 'placeholder' => [
                     'type' => self::TYPE_TEXT,
                     'text' => $this->placeholder_text,
                     'emoji' => $this->emoji,
                 ],
+                'options' => array_values($this->options),
                 'action_id' => $this->action_id,
             ],
         ];

@@ -15,7 +15,7 @@ final class ResponseTest extends TestCase
     public function testEmptyResponse(): void
     {
         $response = new Response();
-        self::assertSame('{"blocks":[]}', $response->render());
+        self::assertSame('{"blocks":[]}', json_encode($response));
     }
 
     public function testTextResponse(): void
@@ -25,7 +25,7 @@ final class ResponseTest extends TestCase
         self::assertSame(
             '{"blocks":[{"type":"section","text":{"type":"plain_text",'
                 . '"text":"testing","emoji":true}}]}',
-            $response->render(),
+            json_encode($response),
         );
     }
 }

@@ -18,10 +18,17 @@ class TextField extends Block implements JsonSerializable, Stringable
     ) {
     }
 
-    public function jsonSerialize(): mixed
+    /**
+     * @return array{
+     *   type: string,
+     *   text: string,
+     *   emoji: bool
+     * }
+     */
+    public function jsonSerialize(): array
     {
         return [
-            'type' => 'plain_text',
+            'type' => self::TYPE_TEXT,
             'text' => $this->text,
             'emoji' => $this->emoji,
         ];

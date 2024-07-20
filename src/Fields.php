@@ -44,10 +44,16 @@ class Fields extends Block implements JsonSerializable, Stringable
         return $this;
     }
 
-    public function jsonSerialize(): mixed
+    /**
+     * @return array{
+     *   type: string,
+     *   fields: array<int, TextField>
+     * }
+     */
+    public function jsonSerialize(): array
     {
         return [
-            'type' => 'section',
+            'type' => self::TYPE_SECTION,
             'fields' => $this->fields,
         ];
     }

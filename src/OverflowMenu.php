@@ -13,9 +13,9 @@ use function array_values;
 /**
  * @psalm-api
  */
-class StaticSelect extends Block implements JsonSerializable, Stringable
+class OverflowMenu extends Block implements JsonSerializable, Stringable
 {
-    public const string TYPE_STATIC_SELECT = 'static_select';
+    public const string TYPE_OVERFLOW = 'overflow';
 
     /**
      * @param array<int, Option> $options
@@ -23,9 +23,7 @@ class StaticSelect extends Block implements JsonSerializable, Stringable
     public function __construct(
         protected string $text,
         protected string $action_id,
-        protected string $placeholder_text,
         protected array $options = [],
-        protected bool $emoji = true,
     ) {
         foreach ($options as $option) {
             /** @psalm-suppress RedundantConditionGivenDocblockType */
@@ -34,7 +32,7 @@ class StaticSelect extends Block implements JsonSerializable, Stringable
             }
             // @phpstan-ignore deadCode.unreachable
             throw new UnexpectedValueException(
-                'StaticSelect options must be an Option',
+                'OverflowMenu options must be an Option',
             );
         }
     }
@@ -60,11 +58,6 @@ class StaticSelect extends Block implements JsonSerializable, Stringable
      *   },
      *   accessory: array{
      *     type: string,
-     *     placeholder: array{
-     *       type: string,
-     *       text: string,
-     *       emoji: bool
-     *     },
      *     options: array<int, Option>,
      *     action_id: string
      *   }
@@ -79,12 +72,7 @@ class StaticSelect extends Block implements JsonSerializable, Stringable
                 'text' => $this->text,
             ],
             'accessory' => [
-                'type' => self::TYPE_STATIC_SELECT,
-                'placeholder' => [
-                    'type' => self::TYPE_TEXT,
-                    'text' => $this->placeholder_text,
-                    'emoji' => $this->emoji,
-                ],
+                'type' => self::TYPE_OVERFLOW,
                 'options' => $this->options,
                 'action_id' => $this->action_id,
             ],

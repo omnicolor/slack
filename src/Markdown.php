@@ -16,12 +16,21 @@ class Markdown extends Block implements JsonSerializable, Stringable
     {
     }
 
-    public function jsonSerialize(): mixed
+    /**
+     * @return array{
+     *   type: string,
+     *   text: array{
+     *     type: string,
+     *     text: string
+     *   }
+     * }
+     */
+    public function jsonSerialize(): array
     {
         return [
-            'type' => 'section',
+            'type' => self::TYPE_SECTION,
             'text' => [
-                'type' => 'mrkdwn',
+                'type' => self::TYPE_MARKDOWN,
                 'text' => $this->text,
             ],
         ];

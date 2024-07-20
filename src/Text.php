@@ -18,12 +18,22 @@ class Text extends Block implements JsonSerializable, Stringable
     ) {
     }
 
-    public function jsonSerialize(): mixed
+    /**
+     * @return array{
+     *   type: string,
+     *   text: array{
+     *     type: string,
+     *     text: string,
+     *     emoji: bool
+     *   }
+     * }
+     */
+    public function jsonSerialize(): array
     {
         return [
-            'type' => 'section',
+            'type' => self::TYPE_SECTION,
             'text' => [
-                'type' => 'plain_text',
+                'type' => self::TYPE_TEXT,
                 'text' => $this->text,
                 'emoji' => $this->emoji,
             ],

@@ -10,14 +10,14 @@ use Stringable;
 /**
  * @psalm-api
  */
-class UsersSelect extends Block implements JsonSerializable, Stringable
+class Image extends Block implements JsonSerializable, Stringable
 {
-    public const string TYPE_USERS_SELECT = 'users_select';
+    public const string TYPE_IMAGE = 'image';
 
     public function __construct(
         protected string $text,
-        protected string $action_id,
-        protected string $placeholder_text,
+        protected string $url,
+        protected string $alt_text,
         protected bool $emoji = true,
     ) {
     }
@@ -31,12 +31,8 @@ class UsersSelect extends Block implements JsonSerializable, Stringable
      *   },
      *   accessory: array{
      *     type: string,
-     *     placeholder: array{
-     *       type: string,
-     *       text: string,
-     *       emoji: bool
-     *     },
-     *     action_id: string
+     *     image_url: string,
+     *     alt_text: string
      *   }
      * }
      */
@@ -49,13 +45,9 @@ class UsersSelect extends Block implements JsonSerializable, Stringable
                 'text' => $this->text,
             ],
             'accessory' => [
-                'type' => self::TYPE_USERS_SELECT,
-                'placeholder' => [
-                    'type' => self::TYPE_TEXT,
-                    'text' => $this->placeholder_text,
-                    'emoji' => $this->emoji,
-                ],
-                'action_id' => $this->action_id,
+                'type' => self::TYPE_IMAGE,
+                'image_url' => $this->url,
+                'alt_text' => $this->alt_text,
             ],
         ];
     }

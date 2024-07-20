@@ -10,34 +10,35 @@ use Stringable;
 /**
  * @psalm-api
  */
-class Option extends Block implements JsonSerializable, Stringable
+class Header extends Block implements JsonSerializable, Stringable
 {
+    public const string TYPE_HEADER = 'header';
+
     public function __construct(
         protected string $text,
-        protected string $value,
         protected bool $emoji = true,
     ) {
     }
 
     /**
      * @return array{
+     *   type: string,
      *   text: array{
      *     type: string,
      *     text: string,
      *     emoji: bool
-     *   },
-     *   value: string
+     *   }
      * }
      */
     public function jsonSerialize(): array
     {
         return [
+            'type' => self::TYPE_HEADER,
             'text' => [
                 'type' => self::TYPE_TEXT,
                 'text' => $this->text,
                 'emoji' => $this->emoji,
             ],
-            'value' => $this->value,
         ];
     }
 }

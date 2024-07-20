@@ -4,18 +4,16 @@ declare(strict_types=1);
 
 namespace Omnicolor\Slack;
 
-use function json_encode;
+use JsonSerializable;
 
-use const JSON_THROW_ON_ERROR;
-
-class Response
+/**
+ * @psalm-api
+ */
+class Response implements JsonSerializable
 {
     /** @var array<int, Block> */
     protected array $blocks = [];
 
-    /**
-     * @psalm-suppress PossiblyUnusedMethod
-     */
     public function addBlock(Block $block): self
     {
         $this->blocks[] = $block;
@@ -23,13 +21,14 @@ class Response
     }
 
     /**
-     * @psalm-suppress PossiblyUnusedMethod
+     * @return array{
+     *   blocks: array<int, Block>
+     * }
      */
-    public function render(): string
+    public function jsonSerialize(): array
     {
-        $object = [
+        return [
             'blocks' => $this->blocks,
         ];
-        return json_encode($object, JSON_THROW_ON_ERROR);
     }
 }
