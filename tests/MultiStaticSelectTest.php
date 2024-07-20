@@ -55,9 +55,7 @@ final class MultiStaticSelectTest extends TestCase
     public function testConstructorWrongType(): void
     {
         self::expectException(UnexpectedValueException::class);
-        self::expectExceptionMessage(
-            'MultiStaticSelect options must be an Option',
-        );
+        self::expectExceptionMessage('Options must be Option objects');
         // @phpstan-ignore argument.type
         new MultiStaticSelect('text', 'action', 'placeholder', ['Testing']);
     }

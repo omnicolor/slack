@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace Omnicolor\Slack;
 
 use JsonSerializable;
+use Omnicolor\Slack\Traits\HasOptions;
 use Stringable;
-use UnexpectedValueException;
-
-use function array_values;
 
 /**
  * @psalm-api
  */
 class OverflowMenu extends Block implements JsonSerializable, Stringable
 {
+    use HasOptions;
+
     public const string TYPE_OVERFLOW = 'overflow';
 
     /**
@@ -25,28 +25,7 @@ class OverflowMenu extends Block implements JsonSerializable, Stringable
         protected string $action_id,
         protected array $options = [],
     ) {
-        foreach ($options as $option) {
-            /** @psalm-suppress RedundantConditionGivenDocblockType */
-            if ($option instanceof Option) {
-                continue;
-            }
-            // @phpstan-ignore deadCode.unreachable
-            throw new UnexpectedValueException(
-                'OverflowMenu options must be an Option',
-            );
-        }
-    }
-
-    public function addOption(Option $option): self
-    {
-        $this->options[] = $option;
-        return $this;
-    }
-
-    public function addOptions(Option ...$options): self
-    {
-        $this->options = $this->options + array_values($options);
-        return $this;
+        $this->verifyOptions();
     }
 
     /**

@@ -51,7 +51,7 @@ final class OverflowMenuTest extends TestCase
     {
         self::expectException(UnexpectedValueException::class);
         self::expectExceptionMessage(
-            'OverflowMenu options must be an Option',
+            'Options must be Option objects',
         );
         // @phpstan-ignore argument.type
         new OverflowMenu('text', 'action', ['Testing']);

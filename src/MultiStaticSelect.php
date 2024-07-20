@@ -5,21 +5,20 @@ declare(strict_types=1);
 namespace Omnicolor\Slack;
 
 use JsonSerializable;
+use Omnicolor\Slack\Traits\HasOptions;
 use Stringable;
-use UnexpectedValueException;
-
-use function array_values;
 
 /**
  * @psalm-api
  */
-class MultiStaticSelect extends StaticSelect implements JsonSerializable, Stringable
+class MultiStaticSelect extends Block implements JsonSerializable, Stringable
 {
+    use HasOptions;
+
     public const string TYPE_MULTI_SELECT = 'multi_static_select';
 
     /**
      * @param array<int, Option> $options
-     * @phpstan-ignore constructor.missingParentCall
      */
     public function __construct(
         protected string $text,
@@ -28,16 +27,7 @@ class MultiStaticSelect extends StaticSelect implements JsonSerializable, String
         protected array $options = [],
         protected bool $emoji = true,
     ) {
-        foreach ($options as $option) {
-            /** @psalm-suppress RedundantConditionGivenDocblockType */
-            if ($option instanceof Option) {
-                continue;
-            }
-            // @phpstan-ignore deadCode.unreachable
-            throw new UnexpectedValueException(
-                'MultiStaticSelect options must be an Option',
-            );
-        }
+        $this->verifyOptions();
     }
 
     /**

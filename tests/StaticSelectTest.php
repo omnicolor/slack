@@ -55,9 +55,7 @@ final class StaticSelectTest extends TestCase
     public function testConstructorWrongType(): void
     {
         self::expectException(UnexpectedValueException::class);
-        self::expectExceptionMessage(
-            'StaticSelect options must be an Option',
-        );
+        self::expectExceptionMessage('Options must be Option objects');
         // @phpstan-ignore argument.type
         new StaticSelect('text', 'action', 'placeholder', ['Testing']);
     }
