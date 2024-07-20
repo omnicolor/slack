@@ -28,7 +28,8 @@
     "license": "MIT",
     "minimum-stability": "stable",
     "require": {
-        "php": "^8.3"
+        "php": "^8.3",
+        "league/uri": "^7.0"
     },
     "require-dev": {
         "captainhook/captainhook-phar": "^5.23",
