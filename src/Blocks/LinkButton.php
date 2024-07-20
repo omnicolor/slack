@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Omnicolor\Slack\Blocks;
 
 use JsonSerializable;
+use League\Uri\Uri;
 use Omnicolor\Slack\Block;
 use Stringable;
 
@@ -15,14 +16,17 @@ class LinkButton extends Block implements JsonSerializable, Stringable
 {
     public const string TYPE_BUTTON = 'button';
 
+    protected Uri $url;
+
     public function __construct(
         protected string $text,
         protected string $button_text,
         protected string $value,
         protected string $action_id,
-        protected string $url,
+        string $url,
         protected bool $emoji = true,
     ) {
+        $this->url = Uri::new($url);
     }
 
     /**
@@ -62,7 +66,7 @@ class LinkButton extends Block implements JsonSerializable, Stringable
                 ],
                 'value' => $this->value,
                 'action_id' => $this->action_id,
-                'url' => $this->url,
+                'url' => (string)$this->url,
             ],
         ];
     }
