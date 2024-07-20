@@ -2,24 +2,23 @@
 
 declare(strict_types=1);
 
-namespace Omnicolor\Slack;
+namespace Omnicolor\Slack\Blocks;
 
 use JsonSerializable;
+use Omnicolor\Slack\Block;
 use Stringable;
 
 /**
  * @psalm-api
  */
-class LinkButton extends Block implements JsonSerializable, Stringable
+class UsersSelect extends Block implements JsonSerializable, Stringable
 {
-    public const string TYPE_BUTTON = 'button';
+    public const string TYPE_USERS_SELECT = 'users_select';
 
     public function __construct(
         protected string $text,
-        protected string $button_text,
-        protected string $value,
         protected string $action_id,
-        protected string $url,
+        protected string $placeholder_text,
         protected bool $emoji = true,
     ) {
     }
@@ -33,14 +32,12 @@ class LinkButton extends Block implements JsonSerializable, Stringable
      *   },
      *   accessory: array{
      *     type: string,
-     *     text: array{
+     *     placeholder: array{
      *       type: string,
      *       text: string,
      *       emoji: bool
      *     },
-     *     value: string,
-     *     action_id: string,
-     *     url: string
+     *     action_id: string
      *   }
      * }
      */
@@ -53,15 +50,13 @@ class LinkButton extends Block implements JsonSerializable, Stringable
                 'text' => $this->text,
             ],
             'accessory' => [
-                'type' => self::TYPE_BUTTON,
-                'text' => [
+                'type' => self::TYPE_USERS_SELECT,
+                'placeholder' => [
                     'type' => self::TYPE_TEXT,
-                    'text' => $this->button_text,
+                    'text' => $this->placeholder_text,
                     'emoji' => $this->emoji,
                 ],
-                'value' => $this->value,
                 'action_id' => $this->action_id,
-                'url' => $this->url,
             ],
         ];
     }

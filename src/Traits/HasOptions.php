@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Omnicolor\Slack\Traits;
 
-use Omnicolor\Slack\Option;
+use Omnicolor\Slack\Blocks\Option;
 use UnexpectedValueException;
 
 use function array_values;

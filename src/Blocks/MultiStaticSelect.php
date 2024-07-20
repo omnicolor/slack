@@ -2,20 +2,21 @@
 
 declare(strict_types=1);
 
-namespace Omnicolor\Slack;
+namespace Omnicolor\Slack\Blocks;
 
 use JsonSerializable;
+use Omnicolor\Slack\Block;
 use Omnicolor\Slack\Traits\HasOptions;
 use Stringable;
 
 /**
  * @psalm-api
  */
-class StaticSelect extends Block implements JsonSerializable, Stringable
+class MultiStaticSelect extends Block implements JsonSerializable, Stringable
 {
     use HasOptions;
 
-    public const string TYPE_STATIC_SELECT = 'static_select';
+    public const string TYPE_MULTI_SELECT = 'multi_static_select';
 
     /**
      * @param array<int, Option> $options
@@ -58,13 +59,13 @@ class StaticSelect extends Block implements JsonSerializable, Stringable
                 'text' => $this->text,
             ],
             'accessory' => [
-                'type' => self::TYPE_STATIC_SELECT,
+                'type' => self::TYPE_MULTI_SELECT,
                 'placeholder' => [
                     'type' => self::TYPE_TEXT,
                     'text' => $this->placeholder_text,
                     'emoji' => $this->emoji,
                 ],
-                'options' => $this->options,
+                'options' => array_values($this->options),
                 'action_id' => $this->action_id,
             ],
         ];

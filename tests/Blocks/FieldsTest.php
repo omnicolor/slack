@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tests;
+namespace Tests\Blocks;
 
-use Omnicolor\Slack\Fields;
-use Omnicolor\Slack\TextField;
+use Omnicolor\Slack\Blocks\Fields;
+use Omnicolor\Slack\Blocks\TextField;
 use PHPUnit\Framework\Attributes\Small;
 use PHPUnit\Framework\TestCase;
 use UnexpectedValueException;

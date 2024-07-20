@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests;
+namespace Tests\Blocks;
 
-use Omnicolor\Slack\LinkButton;
+use Omnicolor\Slack\Blocks\LinkButton;
 use PHPUnit\Framework\Attributes\Small;
 use PHPUnit\Framework\TestCase;
 

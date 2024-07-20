@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tests;
+namespace Tests\Blocks;
 
-use Omnicolor\Slack\MultiStaticSelect;
-use Omnicolor\Slack\Option;
+use Omnicolor\Slack\Blocks\MultiStaticSelect;
+use Omnicolor\Slack\Blocks\Option;
 use PHPUnit\Framework\Attributes\Small;
 use PHPUnit\Framework\TestCase;
 use UnexpectedValueException;

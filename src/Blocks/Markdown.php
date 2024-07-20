@@ -2,20 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Omnicolor\Slack;
+namespace Omnicolor\Slack\Blocks;
 
 use JsonSerializable;
+use Omnicolor\Slack\Block;
 use Stringable;
 
 /**
  * @psalm-api
  */
-class Text extends Block implements JsonSerializable, Stringable
+class Markdown extends Block implements JsonSerializable, Stringable
 {
-    public function __construct(
-        protected string $text,
-        protected bool $emoji = true,
-    ) {
+    public function __construct(protected string $text)
+    {
     }
 
     /**
@@ -23,8 +22,7 @@ class Text extends Block implements JsonSerializable, Stringable
      *   type: string,
      *   text: array{
      *     type: string,
-     *     text: string,
-     *     emoji: bool
+     *     text: string
      *   }
      * }
      */
@@ -33,9 +31,8 @@ class Text extends Block implements JsonSerializable, Stringable
         return [
             'type' => self::TYPE_SECTION,
             'text' => [
-                'type' => self::TYPE_TEXT,
+                'type' => self::TYPE_MARKDOWN,
                 'text' => $this->text,
-                'emoji' => $this->emoji,
             ],
         ];
     }

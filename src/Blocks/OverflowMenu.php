@@ -2,24 +2,31 @@
 
 declare(strict_types=1);
 
-namespace Omnicolor\Slack;
+namespace Omnicolor\Slack\Blocks;
 
 use JsonSerializable;
+use Omnicolor\Slack\Block;
+use Omnicolor\Slack\Traits\HasOptions;
 use Stringable;
 
 /**
  * @psalm-api
  */
-class UsersSelect extends Block implements JsonSerializable, Stringable
+class OverflowMenu extends Block implements JsonSerializable, Stringable
 {
-    public const string TYPE_USERS_SELECT = 'users_select';
+    use HasOptions;
 
+    public const string TYPE_OVERFLOW = 'overflow';
+
+    /**
+     * @param array<int, Option> $options
+     */
     public function __construct(
         protected string $text,
         protected string $action_id,
-        protected string $placeholder_text,
-        protected bool $emoji = true,
+        protected array $options = [],
     ) {
+        $this->verifyOptions();
     }
 
     /**
@@ -31,11 +38,7 @@ class UsersSelect extends Block implements JsonSerializable, Stringable
      *   },
      *   accessory: array{
      *     type: string,
-     *     placeholder: array{
-     *       type: string,
-     *       text: string,
-     *       emoji: bool
-     *     },
+     *     options: array<int, Option>,
      *     action_id: string
      *   }
      * }
@@ -49,12 +52,8 @@ class UsersSelect extends Block implements JsonSerializable, Stringable
                 'text' => $this->text,
             ],
             'accessory' => [
-                'type' => self::TYPE_USERS_SELECT,
-                'placeholder' => [
-                    'type' => self::TYPE_TEXT,
-                    'text' => $this->placeholder_text,
-                    'emoji' => $this->emoji,
-                ],
+                'type' => self::TYPE_OVERFLOW,
+                'options' => $this->options,
                 'action_id' => $this->action_id,
             ],
         ];

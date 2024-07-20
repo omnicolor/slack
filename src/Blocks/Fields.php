@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Omnicolor\Slack;
+namespace Omnicolor\Slack\Blocks;
 
 use JsonSerializable;
+use Omnicolor\Slack\Block;
 use Stringable;
 use UnexpectedValueException;
 

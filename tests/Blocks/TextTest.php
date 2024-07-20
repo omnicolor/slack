@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests;
+namespace Tests\Blocks;
 
-use Omnicolor\Slack\Text;
+use Omnicolor\Slack\Blocks\Text;
 use PHPUnit\Framework\Attributes\Small;
 use PHPUnit\Framework\TestCase;
 
