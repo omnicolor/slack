@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Tests;
 
 use Omnicolor\Slack\SlashCommand;
+use PHPUnit\Framework\Attributes\Small;
 use PHPUnit\Framework\TestCase;
 
+#[Small]
 final class SlashCommandTest extends TestCase
 {
     protected SlashCommand $command;
