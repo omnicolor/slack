@@ -6,6 +6,7 @@ namespace Omnicolor\Slack\Blocks;
 
 use JsonSerializable;
 use Omnicolor\Slack\Block;
+use Omnicolor\Slack\Subblock;
 use Omnicolor\Slack\Traits\HasOptions;
 use Stringable;
 
@@ -19,7 +20,7 @@ class OverflowMenu extends Block implements JsonSerializable, Stringable
     public const string TYPE_OVERFLOW = 'overflow';
 
     /**
-     * @param array<int, Option> $options
+     * @param array<int, Subblock> $options
      */
     public function __construct(
         protected string $text,
@@ -38,7 +39,7 @@ class OverflowMenu extends Block implements JsonSerializable, Stringable
      *   },
      *   accessory: array{
      *     type: string,
-     *     options: array<int, Option>,
+     *     options: array<int, Subblock>,
      *     action_id: string
      *   }
      * }

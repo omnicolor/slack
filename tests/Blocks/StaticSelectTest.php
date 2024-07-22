@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Blocks;
 
-use Omnicolor\Slack\Blocks\Option;
 use Omnicolor\Slack\Blocks\StaticSelect;
+use Omnicolor\Slack\Subblocks\Option;
 use PHPUnit\Framework\Attributes\Small;
 use PHPUnit\Framework\TestCase;
 use UnexpectedValueException;
@@ -55,7 +55,7 @@ final class StaticSelectTest extends TestCase
     public function testConstructorWrongType(): void
     {
         self::expectException(UnexpectedValueException::class);
-        self::expectExceptionMessage('Options must be Option objects');
+        self::expectExceptionMessage('Options must be Subblock objects');
         // @phpstan-ignore argument.type
         new StaticSelect('text', 'action', 'placeholder', ['Testing']);
     }

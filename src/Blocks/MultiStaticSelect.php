@@ -6,6 +6,7 @@ namespace Omnicolor\Slack\Blocks;
 
 use JsonSerializable;
 use Omnicolor\Slack\Block;
+use Omnicolor\Slack\Subblock;
 use Omnicolor\Slack\Traits\HasOptions;
 use Stringable;
 
@@ -19,7 +20,7 @@ class MultiStaticSelect extends Block implements JsonSerializable, Stringable
     public const string TYPE_MULTI_SELECT = 'multi_static_select';
 
     /**
-     * @param array<int, Option> $options
+     * @param array<int, Subblock> $options
      */
     public function __construct(
         protected string $text,
@@ -45,7 +46,7 @@ class MultiStaticSelect extends Block implements JsonSerializable, Stringable
      *       text: string,
      *       emoji: bool
      *     },
-     *     options: array<int, Option>,
+     *     options: array<int, Subblock>,
      *     action_id: string
      *   }
      * }

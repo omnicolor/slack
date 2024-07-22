@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Blocks;
 
-use Omnicolor\Slack\Blocks\Option;
 use Omnicolor\Slack\Blocks\OverflowMenu;
+use Omnicolor\Slack\Subblocks\Option;
 use PHPUnit\Framework\Attributes\Small;
 use PHPUnit\Framework\TestCase;
 use UnexpectedValueException;
@@ -51,7 +51,7 @@ final class OverflowMenuTest extends TestCase
     {
         self::expectException(UnexpectedValueException::class);
         self::expectExceptionMessage(
-            'Options must be Option objects',
+            'Options must be Subblock objects',
         );
         // @phpstan-ignore argument.type
         new OverflowMenu('text', 'action', ['Testing']);

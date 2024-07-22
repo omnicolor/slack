@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Omnicolor\Slack\Blocks;
+namespace Omnicolor\Slack\Subblocks;
 
 use JsonSerializable;
-use Omnicolor\Slack\Block;
+use Omnicolor\Slack\Subblock;
 use Stringable;
 
 /**
  * @psalm-api
  */
-class Option extends Block implements JsonSerializable, Stringable
+class Option extends Subblock implements JsonSerializable, Stringable
 {
     public function __construct(
         protected string $text,
