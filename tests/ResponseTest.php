@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests;
 
-use Omnicolor\Slack\Blocks\Text;
 use Omnicolor\Slack\Response;
+use Omnicolor\Slack\Sections\Text;
 use PHPUnit\Framework\Attributes\Small;
 use PHPUnit\Framework\TestCase;
 
