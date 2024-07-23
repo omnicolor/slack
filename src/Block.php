@@ -13,6 +13,7 @@ use const JSON_THROW_ON_ERROR;
 
 abstract class Block implements JsonSerializable, Stringable
 {
+    public const string TYPE_ACTION = 'actions';
     public const string TYPE_MARKDOWN = 'mrkdwn';
     public const string TYPE_SECTION = 'section';
     public const string TYPE_TEXT = 'plain_text';
