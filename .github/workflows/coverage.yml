@@ -1,0 +1,66 @@
+name: PHPUnit
+on:
+  pull_request:
+    paths-ignore:
+      - '**/*.md'
+jobs:
+  Code-Coverage:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-version:
+          - "8.3"
+          - "8.4"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install PHP with extensions
+        uses: shivammathur/setup-php@master
+        with:
+          tools: composer:v2
+          php-version: ${{ matrix.php-version }}
+          extensions: "mbstring"
+          coverage: xdebug
+
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache Composer
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Install Composer dependencies
+        run: composer install --no-progress --no-interaction
+
+      - name: Execute unit tests with code coverage
+        run: vendor/bin/phpunit --coverage-clover 'coverage/clover.xml'
+
+      - name: Upload test coverage
+        uses: actions/upload-artifact@v4
+        with:
+          name: Test Coverage Report
+          path: ./coverage/
+          overwrite: true
+
+      - name: "Comment coverage report"
+        uses: danhunsaker/clover-reporter-action@v0.2.17-clover
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          clover-file: ./coverage/clover.xml
+
+      - name: Generate coverage badge
+        uses: timkrase/phpunit-coverage-badge@v1.2.1
+        with:
+          push_badge: true
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          report: coverage/clover.xml
+
+      - name: "Retrieve the logs"
+        if: ${{ failure() }}
+        run: cat storage/logs/*
