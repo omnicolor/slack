@@ -11,6 +11,9 @@ jobs:
         php-version:
           - "8.3"
           - "8.4"
+    permissions:
+      issues: write
+      pull-requests: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -43,7 +46,7 @@ jobs:
 
       - name: Upload test coverage
         uses: actions/upload-artifact@v4
-        if: ${{ matrix.php-version == '8.4' }}
+        if: ${{ matrix.php-version == "8.4" }}
         with:
           name: Test Coverage Report
           path: ./coverage/
@@ -51,7 +54,7 @@ jobs:
 
       - name: "Comment coverage report"
         uses: danhunsaker/clover-reporter-action@v0.2.17-clover
-        if: ${{ matrix.php-version == '8.4' }}
+        if: ${{ matrix.php-version == "8.4" }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           clover-file: ./coverage/clover.xml
