@@ -8,21 +8,19 @@ use JsonSerializable;
 use Omnicolor\Slack\Attachment;
 use Override;
 
+/**
+ * Fields attachment is a container for zero or more fields, which the Slack
+ * client will format into a table-like display automatically.
+ */
 class FieldsAttachment extends Attachment implements JsonSerializable
 {
-    /**
-     * Fields to include with the attachment.
-     * @var array<int, Field>
-     */
+    /** @var array<int, Field> */
     protected array $fields = [];
 
     public function __construct(protected readonly string $title)
     {
     }
 
-    /**
-     * Add a field to the attachment.
-     */
     public function addField(Field $field): FieldsAttachment
     {
         $this->fields[] = $field;
