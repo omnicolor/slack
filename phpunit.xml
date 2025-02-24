@@ -11,6 +11,10 @@
          failOnRisky="true"
          failOnWarning="true">
 
+    <php>
+        <env name="SLACK_SIGNING_SECRET" value="slack-secret" force="true"/>
+    </php>
+
     <testsuites>
         <testsuite name="default">
             <directory>tests</directory>
