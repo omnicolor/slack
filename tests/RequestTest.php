@@ -178,4 +178,14 @@ final class RequestTest extends TestCase
         $request = new Request($payload);
         self::assertTrue($request->verify($time, $signature));
     }
+
+    public function testVerifyByToken(): void
+    {
+        $payload = 'token=gIkuvaNzQIHg97ATvDxqgjtO';
+        $request = new Request($payload);
+        // @phpstan-ignore method.deprecated
+        self::assertTrue($request->verifyToken('gIkuvaNzQIHg97ATvDxqgjtO'));
+        // @phpstan-ignore method.deprecated
+        self::assertFalse($request->verifyToken('foo'));
+    }
 }

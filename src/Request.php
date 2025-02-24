@@ -211,4 +211,12 @@ class Request
             hash_hmac('sha256', $base_string, $secret),
         );
     }
+
+    /**
+     * @deprecated
+     */
+    public function verifyToken(string $token): bool
+    {
+        return $this->token === $token;
+    }
 }
