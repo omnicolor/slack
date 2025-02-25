@@ -6,10 +6,18 @@ namespace Omnicolor\Slack\Contexts;
 
 use JsonSerializable;
 use Omnicolor\Slack\Block;
+use Override;
 use Stringable;
 
 /**
- * @psalm-api
+ * @phpstan-type SerializedPlainText array{
+ *     type: string,
+ *     text: array{
+ *         type: string,
+ *         text: string,
+ *         emoji: bool
+ *     }
+ * }
  */
 class PlainText extends Block implements JsonSerializable, Stringable
 {
@@ -20,15 +28,9 @@ class PlainText extends Block implements JsonSerializable, Stringable
     }
 
     /**
-     * @return array{
-     *   type: string,
-     *   text: array{
-     *     type: string,
-     *     text: string,
-     *     emoji: bool
-     *   }
-     * }
+     * @return SerializedPlainText
      */
+    #[Override]
     public function jsonSerialize(): array
     {
         return [

@@ -7,6 +7,9 @@ namespace Omnicolor\Slack\Attachments;
 use JsonSerializable;
 use Override;
 
+/**
+ * @phpstan-type SerializedField array{title: string, value: string, short: bool}
+ */
 readonly class Field implements JsonSerializable
 {
     public function __construct(
@@ -17,11 +20,7 @@ readonly class Field implements JsonSerializable
     }
 
     /**
-     * @return array{
-     *     title: string,
-     *     value: string,
-     *     short: bool
-     * }
+     * @return SerializedField
      */
     public function toArray(): array
     {
@@ -33,11 +32,7 @@ readonly class Field implements JsonSerializable
     }
 
     /**
-     * @return array{
-     *     title: string,
-     *     value: string,
-     *     short: bool
-     * }
+     * @return SerializedField
      */
     #[Override]
     public function jsonSerialize(): array

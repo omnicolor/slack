@@ -8,10 +8,23 @@ use JsonSerializable;
 use Omnicolor\Slack\Block;
 use Omnicolor\Slack\Subblock;
 use Omnicolor\Slack\Traits\HasOptions;
+use Override;
 use Stringable;
 
 /**
- * @psalm-api
+ * @phpstan-import-type SerializedSubblock from Subblock
+ * @phpstan-type SerializedCheckboxes array{
+ *     type: string,
+ *     text: array{
+ *         type: string,
+ *         text: string
+ *     },
+ *     accessory: array{
+ *         type: string,
+ *         options: array<int, SerializedSubblock>,
+ *         action_id: string
+ *     }
+ * }
  */
 class Checkboxes extends Block implements JsonSerializable, Stringable
 {
@@ -31,21 +44,15 @@ class Checkboxes extends Block implements JsonSerializable, Stringable
     }
 
     /**
-     * @return array{
-     *   type: string,
-     *   text: array{
-     *     type: string,
-     *     text: string
-     *   },
-     *   accessory: array{
-     *     type: string,
-     *     options: array<int, Subblock>,
-     *     action_id: string
-     *   }
-     * }
+     * @return SerializedCheckboxes
      */
+    #[Override]
     public function jsonSerialize(): array
     {
+        $options = [];
+        foreach ($this->options as $option) {
+            $options[] = $option->jsonSerialize();
+        }
         return [
             'type' => self::TYPE_SECTION,
             'text' => [
@@ -54,7 +61,7 @@ class Checkboxes extends Block implements JsonSerializable, Stringable
             ],
             'accessory' => [
                 'type' => self::TYPE_CHECKBOXES,
-                'options' => $this->options,
+                'options' => $options,
                 'action_id' => $this->action_id,
             ],
         ];

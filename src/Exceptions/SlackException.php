@@ -18,6 +18,8 @@ use const PHP_EOL;
  * An exception that's meant to be shown to a user within a Slack client.
  * The message for the exception will be included in the text of a legacy
  * attachment with the color set to "danger".
+ * @phpstan-import-type SerializedAttachment from Attachment
+ * @phpstan-import-type SerializedBlock from Block
  */
 class SlackException extends Exception implements JsonSerializable
 {
@@ -30,8 +32,8 @@ class SlackException extends Exception implements JsonSerializable
     /**
      * Render the exception as a Slack Response to return to the client.
      * @return array{
-     *     attachments?: array<int, Attachment>,
-     *     blocks: array<int, Block>,
+     *     attachments?: array<int, SerializedAttachment>,
+     *     blocks: array<int, SerializedBlock>,
      *     response_type: string,
      *     text?: string
      * }

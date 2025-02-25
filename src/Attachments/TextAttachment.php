@@ -10,6 +10,12 @@ use Override;
 
 /**
  * Simple text attachment for a Slack Response.
+ * @phpstan-type SerializedTextAttachment array{
+ *     color: string,
+ *     footer?: string,
+ *     text: string,
+ *     title: string
+ * }
  */
 class TextAttachment extends Attachment implements JsonSerializable
 {
@@ -31,15 +37,10 @@ class TextAttachment extends Attachment implements JsonSerializable
     }
 
     /**
-     * Return the attachment as an array.
-     * @return array{
-     *     color: string,
-     *     footer?: string,
-     *     text: string,
-     *     title: string
-     * }
+     * @return SerializedTextAttachment
      */
-    public function toArray(): array
+    #[Override]
+    public function jsonSerialize(): array
     {
         if (null === $this->footer) {
             return [
@@ -55,19 +56,5 @@ class TextAttachment extends Attachment implements JsonSerializable
             'text' => $this->text,
             'title' => $this->title,
         ];
-    }
-
-    /**
-     * @return array{
-     *     color: string,
-     *     footer?: string,
-     *     text: string,
-     *     title: string
-     * }
-     */
-    #[Override]
-    public function jsonSerialize(): array
-    {
-        return $this->toArray();
     }
 }

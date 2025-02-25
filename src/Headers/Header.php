@@ -6,10 +6,18 @@ namespace Omnicolor\Slack\Headers;
 
 use JsonSerializable;
 use Omnicolor\Slack\Block;
+use Override;
 use Stringable;
 
 /**
- * @psalm-api
+ * @phpstan-type SerializedHeader array{
+ *     type: string,
+ *     text: array{
+ *         type: string,
+ *         text: string,
+ *         emoji: bool
+ *     }
+ * }
  */
 class Header extends Block implements JsonSerializable, Stringable
 {
@@ -22,15 +30,9 @@ class Header extends Block implements JsonSerializable, Stringable
     }
 
     /**
-     * @return array{
-     *   type: string,
-     *   text: array{
-     *     type: string,
-     *     text: string,
-     *     emoji: bool
-     *   }
-     * }
+     * @return SerializedHeader
      */
+    #[Override]
     public function jsonSerialize(): array
     {
         return [

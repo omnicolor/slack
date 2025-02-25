@@ -7,10 +7,28 @@ namespace Omnicolor\Slack\Sections;
 use JsonSerializable;
 use League\Uri\Uri;
 use Omnicolor\Slack\Block;
+use Override;
 use Stringable;
 
 /**
- * @psalm-api
+ * @phpstan-type SerializedLinkButton array{
+ *     type: string,
+ *     text: array{
+ *         type: string,
+ *         text: string
+ *     },
+ *     accessory: array{
+ *         type: string,
+ *         text: array{
+ *             type: string,
+ *             text: string,
+ *             emoji: bool
+ *         },
+ *         value: string,
+ *         action_id: string,
+ *         url: string
+ *     }
+ * }
  */
 class LinkButton extends Block implements JsonSerializable, Stringable
 {
@@ -30,25 +48,9 @@ class LinkButton extends Block implements JsonSerializable, Stringable
     }
 
     /**
-     * @return array{
-     *   type: string,
-     *   text: array{
-     *     type: string,
-     *     text: string
-     *   },
-     *   accessory: array{
-     *     type: string,
-     *     text: array{
-     *       type: string,
-     *       text: string,
-     *       emoji: bool
-     *     },
-     *     value: string,
-     *     action_id: string,
-     *     url: string
-     *   }
-     * }
+     * @return SerializedLinkButton
      */
+    #[Override]
     public function jsonSerialize(): array
     {
         return [
