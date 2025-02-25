@@ -6,10 +6,15 @@ namespace Omnicolor\Slack\Sections;
 
 use JsonSerializable;
 use Omnicolor\Slack\Block;
+use Override;
 use Stringable;
 
 /**
- * @psalm-api
+ * @phpstan-type SerializedTextField array{
+ *     type: string,
+ *     text: string,
+ *     emoji: bool
+ * }
  */
 class TextField extends Block implements JsonSerializable, Stringable
 {
@@ -20,12 +25,9 @@ class TextField extends Block implements JsonSerializable, Stringable
     }
 
     /**
-     * @return array{
-     *   type: string,
-     *   text: string,
-     *   emoji: bool
-     * }
+     * @return SerializedTextField
      */
+    #[Override]
     public function jsonSerialize(): array
     {
         return [

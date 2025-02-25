@@ -24,7 +24,7 @@ final class TextAttachmentTest extends TestCase
             'text' => 'Text',
             'title' => 'Title',
         ];
-        self::assertEqualsCanonicalizing($expected, $attachment->toArray());
+        self::assertEqualsCanonicalizing($expected, $attachment->jsonSerialize());
     }
 
     /**
@@ -38,7 +38,7 @@ final class TextAttachmentTest extends TestCase
             'text' => 'Black',
             'title' => 'Other',
         ];
-        self::assertEqualsCanonicalizing($expected, $attachment->toArray());
+        self::assertEqualsCanonicalizing($expected, $attachment->jsonSerialize());
     }
 
     /**
@@ -54,6 +54,6 @@ final class TextAttachmentTest extends TestCase
             'text' => 'Black',
             'title' => 'Footer Test',
         ];
-        self::assertSame($expected, $attachment->toArray());
+        self::assertSame($expected, $attachment->jsonSerialize());
     }
 }

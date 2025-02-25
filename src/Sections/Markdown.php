@@ -6,10 +6,17 @@ namespace Omnicolor\Slack\Sections;
 
 use JsonSerializable;
 use Omnicolor\Slack\Block;
+use Override;
 use Stringable;
 
 /**
- * @psalm-api
+ * @phpstan-type SerializedMarkdown array{
+ *     type: string,
+ *     text: array{
+ *         type: string,
+ *         text: string
+ *     }
+ * }
  */
 class Markdown extends Block implements JsonSerializable, Stringable
 {
@@ -18,14 +25,9 @@ class Markdown extends Block implements JsonSerializable, Stringable
     }
 
     /**
-     * @return array{
-     *   type: string,
-     *   text: array{
-     *     type: string,
-     *     text: string
-     *   }
-     * }
+     * @return SerializedMarkdown
      */
+    #[Override]
     public function jsonSerialize(): array
     {
         return [
