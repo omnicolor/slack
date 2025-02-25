@@ -6,13 +6,18 @@ namespace Omnicolor\Slack\Sections;
 
 use JsonSerializable;
 use Omnicolor\Slack\Block;
+use Override;
 use Stringable;
 use UnexpectedValueException;
 
 use function array_values;
 
 /**
- * @psalm-api
+ * @phpstan-import-type SerializedTextField from TextField
+ * @phpstan-type SerializedFields array{
+ *     type: string,
+ *     fields: array<int, SerializedTextField>
+ * }
  */
 class Fields extends Block implements JsonSerializable, Stringable
 {
@@ -46,16 +51,18 @@ class Fields extends Block implements JsonSerializable, Stringable
     }
 
     /**
-     * @return array{
-     *   type: string,
-     *   fields: array<int, TextField>
-     * }
+     * @return SerializedFields
      */
+    #[Override]
     public function jsonSerialize(): array
     {
+        $fields = [];
+        foreach ($this->fields as $field) {
+            $fields[] = $field->jsonSerialize();
+        }
         return [
             'type' => self::TYPE_SECTION,
-            'fields' => $this->fields,
+            'fields' => $fields,
         ];
     }
 }

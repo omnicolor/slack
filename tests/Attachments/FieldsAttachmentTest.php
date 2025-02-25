@@ -23,7 +23,7 @@ final class FieldsAttachmentTest extends TestCase
             'title' => 'Empty',
             'fields' => [],
         ];
-        self::assertSame($expected, $attachment->toArray());
+        self::assertSame($expected, $attachment->jsonSerialize());
     }
 
     public function testWithFields(): void
@@ -46,7 +46,7 @@ final class FieldsAttachmentTest extends TestCase
                 ],
             ],
         ];
-        self::assertSame($expected, $attachment->toArray());
+        self::assertSame($expected, $attachment->jsonSerialize());
     }
 
     public function testJsonEncode(): void

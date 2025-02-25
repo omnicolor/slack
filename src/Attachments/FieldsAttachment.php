@@ -11,6 +11,11 @@ use Override;
 /**
  * Fields attachment is a container for zero or more fields, which the Slack
  * client will format into a table-like display automatically.
+ * @phpstan-import-type SerializedField from Field
+ * @phpstan-type SerializedFieldsAttachment array{
+ *     title: string,
+ *     fields: array<int, SerializedField>
+ * }
  */
 class FieldsAttachment extends Attachment implements JsonSerializable
 {
@@ -28,13 +33,10 @@ class FieldsAttachment extends Attachment implements JsonSerializable
     }
 
     /**
-     * Return the attachment as an array.
-     * @return array{
-     *     title: string,
-     *     fields: array<int, array{title: string, value: string, short: bool}>
-     * }
+     * @return SerializedFieldsAttachment
      */
-    public function toArray(): array
+    #[Override]
+    public function jsonSerialize(): array
     {
         $self = [
             'title' => $this->title,
@@ -44,17 +46,5 @@ class FieldsAttachment extends Attachment implements JsonSerializable
             $self['fields'][] = $field->toArray();
         }
         return $self;
-    }
-
-    /**
-     * @return array{
-     *     title: string,
-     *     fields: array<int, array{title: string, value: string, short: bool}>
-     * }
-     */
-    #[Override]
-    public function jsonSerialize(): array
-    {
-        return $this->toArray();
     }
 }

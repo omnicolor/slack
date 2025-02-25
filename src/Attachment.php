@@ -5,11 +5,22 @@ declare(strict_types=1);
 namespace Omnicolor\Slack;
 
 use JsonSerializable;
+use Omnicolor\Slack\Attachments\FieldsAttachment;
+use Omnicolor\Slack\Attachments\TextAttachment;
+use Override;
+use Stringable;
+
+use function json_encode;
+
+use const JSON_THROW_ON_ERROR;
 
 /**
  * Attachment that can be added to a Slack Response.
+ * @phpstan-import-type SerializedFieldsAttachment from FieldsAttachment
+ * @phpstan-import-type SerializedTextAttachment from TextAttachment
+ * @phpstan-type SerializedAttachment (SerializedTextAttachment | SerializedFieldsAttachment)
  */
-abstract class Attachment implements JsonSerializable
+abstract class Attachment implements JsonSerializable, Stringable
 {
     public const string COLOR_DANGER = 'danger';
     public const string COLOR_INFO = '#439Fe0';
@@ -17,8 +28,14 @@ abstract class Attachment implements JsonSerializable
     public const string COLOR_WARNING = 'warning';
 
     /**
-     * Render the attachment as an array.
-     * @return array<string, mixed>
+     * @return SerializedAttachment
      */
-    abstract public function toArray(): array;
+    #[Override]
+    abstract public function jsonSerialize(): array;
+
+    #[Override]
+    public function __toString(): string
+    {
+        return json_encode($this, JSON_THROW_ON_ERROR);
+    }
 }

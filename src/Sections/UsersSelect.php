@@ -6,10 +6,26 @@ namespace Omnicolor\Slack\Sections;
 
 use JsonSerializable;
 use Omnicolor\Slack\Block;
+use Override;
 use Stringable;
 
 /**
- * @psalm-api
+ * @phpstan-type SerializedUsersSelect array{
+ *     type: string,
+ *     text: array{
+ *         type: string,
+ *         text: string
+ *     },
+ *     accessory: array{
+ *         type: string,
+ *         placeholder: array{
+ *             type: string,
+ *             text: string,
+ *             emoji: bool
+ *         },
+ *         action_id: string
+ *     }
+ * }
  */
 class UsersSelect extends Block implements JsonSerializable, Stringable
 {
@@ -24,23 +40,9 @@ class UsersSelect extends Block implements JsonSerializable, Stringable
     }
 
     /**
-     * @return array{
-     *   type: string,
-     *   text: array{
-     *     type: string,
-     *     text: string
-     *   },
-     *   accessory: array{
-     *     type: string,
-     *     placeholder: array{
-     *       type: string,
-     *       text: string,
-     *       emoji: bool
-     *     },
-     *     action_id: string
-     *   }
-     * }
+     * @return SerializedUsersSelect
      */
+    #[Override]
     public function jsonSerialize(): array
     {
         return [

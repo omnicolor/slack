@@ -8,7 +8,8 @@ use JsonSerializable;
 use Override;
 
 /**
- * @psalm-api
+ * @phpstan-import-type SerializedAttachment from Attachment
+ * @phpstan-import-type SerializedBlock from Block
  */
 class Response implements JsonSerializable
 {
@@ -52,8 +53,8 @@ class Response implements JsonSerializable
 
     /**
      * @return array{
-     *     attachments?: array<int, Attachment>,
-     *     blocks: array<int, Block>,
+     *     attachments?: array<int, SerializedAttachment>,
+     *     blocks: array<int, SerializedBlock>,
      *     delete_original?: bool,
      *     replace_original?: bool,
      *     response_type: string,
@@ -63,12 +64,19 @@ class Response implements JsonSerializable
     #[Override]
     public function jsonSerialize(): array
     {
+        $blocks = [];
+        foreach ($this->blocks as $block) {
+            $blocks[] = $block->jsonSerialize();
+        }
         $self = [
-            'blocks' => $this->blocks,
+            'blocks' => $blocks,
             'response_type' => $this->type->value,
         ];
         if (0 !== count($this->attachments)) {
-            $self['attachments'] = $this->attachments;
+            $self['attachments'] = [];
+            foreach ($this->attachments as $attachment) {
+                $self['attachments'][] = $attachment->jsonSerialize();
+            }
         }
         if ($this->delete_original) {
             $self['delete_original'] = true;

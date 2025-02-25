@@ -6,10 +6,17 @@ namespace Omnicolor\Slack\Subblocks;
 
 use JsonSerializable;
 use Omnicolor\Slack\Subblock;
+use Override;
 use Stringable;
 
 /**
- * @psalm-api
+ * @phpstan-type SerializedCheckboxOption array{
+ *     text: array{
+ *         type: string,
+ *         text: string
+ *     },
+ *     value: string
+ * }
  */
 class CheckboxOption extends Subblock implements JsonSerializable, Stringable
 {
@@ -18,14 +25,9 @@ class CheckboxOption extends Subblock implements JsonSerializable, Stringable
     }
 
     /**
-     * @return array{
-     *   text: array{
-     *     type: string,
-     *     text: string
-     *   },
-     *   value: string
-     * }
+     * @return SerializedCheckboxOption
      */
+    #[Override]
     public function jsonSerialize(): array
     {
         return [

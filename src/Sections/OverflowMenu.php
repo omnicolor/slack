@@ -8,10 +8,22 @@ use JsonSerializable;
 use Omnicolor\Slack\Block;
 use Omnicolor\Slack\Subblock;
 use Omnicolor\Slack\Traits\HasOptions;
+use Override;
 use Stringable;
 
 /**
- * @psalm-api
+ * @phpstan-type SerializedOverflowMenu array{
+ *     type: string,
+ *     text: array{
+ *         type: string,
+ *         text: string
+ *     },
+ *     accessory: array{
+ *         type: string,
+ *         options: array<int, Subblock>,
+ *         action_id: string
+ *     }
+ * }
  */
 class OverflowMenu extends Block implements JsonSerializable, Stringable
 {
@@ -31,19 +43,9 @@ class OverflowMenu extends Block implements JsonSerializable, Stringable
     }
 
     /**
-     * @return array{
-     *   type: string,
-     *   text: array{
-     *     type: string,
-     *     text: string
-     *   },
-     *   accessory: array{
-     *     type: string,
-     *     options: array<int, Subblock>,
-     *     action_id: string
-     *   }
-     * }
+     * @return SerializedOverflowMenu
      */
+    #[Override]
     public function jsonSerialize(): array
     {
         return [
