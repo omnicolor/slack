@@ -8,10 +8,27 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use JsonSerializable;
 use Omnicolor\Slack\Block;
+use Override;
 use Stringable;
 
 /**
- * @psalm-api
+ * @phpstan-type SerializedDatePicker array{
+ *     type: string,
+ *     text: array{
+ *         type: string,
+ *         text: string
+ *     },
+ *     accessory: array{
+ *         type: string,
+ *         initial_date: string,
+ *         placeholder: array{
+ *             type: string,
+ *             text: string,
+ *             emoji: bool
+ *         },
+ *         action_id: string
+ *     }
+ * }
  */
 class DatePicker extends Block implements JsonSerializable, Stringable
 {
@@ -34,24 +51,9 @@ class DatePicker extends Block implements JsonSerializable, Stringable
     }
 
     /**
-     * @return array{
-     *   type: string,
-     *   text: array{
-     *     type: string,
-     *     text: string
-     *   },
-     *   accessory: array{
-     *     type: string,
-     *     initial_date: string,
-     *     placeholder: array{
-     *       type: string,
-     *       text: string,
-     *       emoji: bool
-     *     },
-     *     action_id: string
-     *   }
-     * }
+     * @return SerializedDatePicker
      */
+    #[Override]
     public function jsonSerialize(): array
     {
         return [

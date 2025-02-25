@@ -12,6 +12,7 @@ use Override;
 use Stringable;
 
 /**
+ * @phpstan-import-type SerializedSubblock from Subblock
  * @phpstan-type SerializedOverflowMenu array{
  *     type: string,
  *     text: array{
@@ -20,7 +21,7 @@ use Stringable;
  *     },
  *     accessory: array{
  *         type: string,
- *         options: array<int, Subblock>,
+ *         options: array<int, SerializedSubblock>,
  *         action_id: string
  *     }
  * }
@@ -48,6 +49,10 @@ class OverflowMenu extends Block implements JsonSerializable, Stringable
     #[Override]
     public function jsonSerialize(): array
     {
+        $options = [];
+        foreach ($this->options as $option) {
+            $options[] = $option->jsonSerialize();
+        }
         return [
             'type' => self::TYPE_SECTION,
             'text' => [
@@ -56,7 +61,7 @@ class OverflowMenu extends Block implements JsonSerializable, Stringable
             ],
             'accessory' => [
                 'type' => self::TYPE_OVERFLOW,
-                'options' => $this->options,
+                'options' => $options,
                 'action_id' => $this->action_id,
             ],
         ];
