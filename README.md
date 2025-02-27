@@ -2,6 +2,10 @@
 
 Library for building Slack slash commands and formatting interactions.
 
+This project adheres to a [code of conduct](CODE_OF_CONDUCT.md). By
+participating in this project and its community, you are expected to uphold
+this code.
+
 ## Installation
 
 The preferred method of installation is via [Composer](https://getcomposer.com).
