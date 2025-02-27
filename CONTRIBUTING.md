@@ -24,41 +24,26 @@ your bug report._
 When submitting a bug report, please include enough information to reproduce
 the bug. A good bug report includes the following sections:
 
-* **Description**
-
-  Provide a short and clear description of the bug.
-
-* **Steps to reproduce**
-
-  Provide steps to reproduce the behavior you are experiencing. Please try to
-  keep this as short as possible. If able, create a reproducible script outside
-  of any framework you are using. This will help us to quickly debug the issue.
-
-* **Expected behavior**
-
-  Provide a short and clear description of what you expect to happen.
-
-* **Screenshots or output**
-
-  If applicable, add screenshots or program output to help explain your
-  problem.
-
-* **Environment details**
-
-  Provide details about the system where you're using this package, such as PHP
-  version and operating system.
-
-* **Additional context**
-
-  Provide any additional context that may help us debug the problem.
+* **Description:** Provide a short and clear description of the bug.
+* **Steps to reproduce:** Provide steps to reproduce the behavior you are
+  experiencing. Please try to keep this as short as possible. If able, create a
+  reproducible script without any framework you are using. This will help us
+  to quickly debug the issue.
+* **Expected behavior:** Provide a short and clear description of what you
+  expect to happen.
+* **Screenshots or output:** If applicable, add screenshots or program output
+  to help explain your problem.
+* **Environment details:** Provide details about the system where you're using
+  this package, such as PHP version and operating system.
+* **Additional context:** Provide any additional context that may help us debug
+  the problem.
 
 ## Fixing Bugs
 
-This project welcomes pull requests to fix bugs!
-
-If you see a bug report that you'd like to fix, please feel free to do so.
-Following the directions and guidelines described in the "Adding New Features"
-section below, you may create bugfix branches and send pull requests.
+This project welcomes pull requests to fix bugs! If you see a bug report that
+you'd like to fix, please feel free to do so. Following the directions and
+guidelines described in the "Adding New Features" section below, you may create
+bugfix branches and send pull requests.
 
 ## Adding New Features
 
