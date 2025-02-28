@@ -13,10 +13,6 @@ commands](https://api.slack.com/interactivity/slash-commands) and
     </a>
 </p>
 
-This project adheres to a [code of conduct](CODE_OF_CONDUCT.md). By
-participating in this project and its community, you are expected to uphold
-this code.
-
 ## Installation
 
 The preferred method of installation is via
@@ -26,7 +22,16 @@ package and add it as a requirement to your project's `composer.json`:
 ```bash
 composer require omnicolor/slack
 ```
+
+## Documentation
+
+Building Slack interactions is available in the [documentation](docs/index.md).
+
 ## Contributing
+
+This project adheres to a [code of conduct](CODE_OF_CONDUCT.md). By
+participating in this project and its community, you are expected to uphold
+this code.
 
 Contributions are welcome! To contribute, please familiarize yourself with
 [CONTRIBUTING.md](CONTRIBUTING.md).

@@ -1,8 +1,6 @@
 name: PHPUnit
 on:
   pull_request:
-    paths-ignore:
-      - '**/*.md'
 jobs:
   Code-Coverage:
     runs-on: ubuntu-latest
