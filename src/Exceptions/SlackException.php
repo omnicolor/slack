@@ -27,7 +27,7 @@ class SlackException extends Exception implements JsonSerializable
      * HTTP status code to return with the response.
      * @var mixed
      */
-    protected $code = 200;
+    protected $code = 400;
 
     /**
      * Render the exception as a Slack Response to return to the client.
@@ -41,6 +41,14 @@ class SlackException extends Exception implements JsonSerializable
     #[Override]
     public function jsonSerialize(): array
     {
+        return $this->render()->jsonSerialize();
+    }
+
+    /**
+     * Render the exception as a Slack Response to return to the client.
+     */
+    public function render(): Response
+    {
         if ('' === $this->message) {
             $this->message = 'You must include at least one command '
                 . 'argument.' . PHP_EOL
@@ -48,14 +56,12 @@ class SlackException extends Exception implements JsonSerializable
                 . 'initiative.' . PHP_EOL . PHP_EOL
                 . 'Type `/roll help` for more help.';
         }
-
         // @phpstan-ignore method.deprecated
         return (new Response())
             ->addAttachment(new TextAttachment(
                 'Error',
                 $this->message,
-                TextAttachment::COLOR_DANGER
-            ))
-            ->jsonSerialize();
+                TextAttachment::COLOR_DANGER,
+            ));
     }
 }
