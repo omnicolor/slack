@@ -1,10 +1,15 @@
 # omnicolor/slack
 
-**Library for building Slack slash commands and formatting interactions.**
+**Library for building [Slack slash
+commands](https://api.slack.com/interactivity/slash-commands) and
+[formatting interactions](https://api.slack.com/surfaces/messages#complex_layouts).**
 
 <p align="center">
     <a href="https://github.com/omnicolor/slack/LICENSE.txt">
         <img alt="Read MIT license" src="https://img.shields.io/github/license/omnicolor/slack">
+    </a>
+    <a href="https://github.com/omnicolor/slack/actions/workflows/static-analysis.yml">
+        <img alt="Static analysis status" src="https://img.shields.io/github/actions/workflow/status/omnicolor/slack/static-analysis.yml?label=Static%20analysis">
     </a>
 </p>
 
