@@ -30,4 +30,4 @@ Will produce this output:
 
 And a Slack client will render it like:
 
-![Screenshot of a plain text section.](images/sections/button.png)
+![Screenshot of a plain text section.](../images/sections/button.png)
