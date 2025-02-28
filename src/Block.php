@@ -8,12 +8,11 @@ use JsonSerializable;
 use Omnicolor\Slack\Actions\Button as ActionButton;
 use Omnicolor\Slack\Contexts\PlainText;
 use Omnicolor\Slack\Dividers\Divider;
-use Omnicolor\Slack\Headers\Header as HeadersHeader;
+use Omnicolor\Slack\Headers\Header;
 use Omnicolor\Slack\Sections\Button as SectionButton;
 use Omnicolor\Slack\Sections\Checkboxes;
 use Omnicolor\Slack\Sections\DatePicker;
 use Omnicolor\Slack\Sections\Fields;
-use Omnicolor\Slack\Sections\Header as SectionHeader;
 use Omnicolor\Slack\Sections\Image;
 use Omnicolor\Slack\Sections\LinkButton;
 use Omnicolor\Slack\Sections\Markdown;
@@ -40,10 +39,9 @@ use const JSON_THROW_ON_ERROR;
  * @phpstan-import-type SerializedDatePicker from DatePicker
  * @phpstan-import-type SerializedDivider from Divider
  * @phpstan-import-type SerializedFields from Fields
- * @phpstan-import-type SerializedHeader from HeadersHeader as SerializedHeadersHeader
- * @phpstan-import-type SerializedHeader from SectionHeader as SerializedSectionHeader
- * @phpstan-import-type SerializedImage from Image
+ * @phpstan-import-type SerializedHeader from Header
  * @phpstan-import-type SerializedLinkButton from LinkButton
+ * @phpstan-import-type SerializedImage from Image
  * @phpstan-import-type SerializedMarkdown from Markdown
  * @phpstan-import-type SerializedMultiConversationsSelect from MultiConversationsSelect
  * @phpstan-import-type SerializedMultiStaticSelect from MultiStaticSelect
@@ -61,7 +59,7 @@ use const JSON_THROW_ON_ERROR;
  *     SerializedDatePicker |
  *     SerializedDivider |
  *     SerializedFields |
- *     SerializedHeadersHeader |
+ *     SerializedHeader |
  *     SerializedImage |
  *     SerializedLinkButton |
  *     SerializedMarkdown |
@@ -71,7 +69,6 @@ use const JSON_THROW_ON_ERROR;
  *     SerializedPlainText |
  *     SerializedRadioButtons |
  *     SerializedSectionButton |
- *     SerializedSectionHeader |
  *     SerializedStaticSelect |
  *     SerializedText |
  *     SerializedTextField |
