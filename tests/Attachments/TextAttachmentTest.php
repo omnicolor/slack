@@ -56,4 +56,15 @@ final class TextAttachmentTest extends TestCase
         ];
         self::assertSame($expected, $attachment->jsonSerialize());
     }
+
+    public function testToString(): void
+    {
+        $attachment = (new TextAttachment('toString Test', 'White', '#ffffff'))
+            ->addFooter('This is a footer');
+        self::assertSame(
+            '{"color":"#ffffff","footer":"This is a footer","text":"White",'
+                . '"title":"toString Test"}',
+            (string)$attachment,
+        );
+    }
 }
