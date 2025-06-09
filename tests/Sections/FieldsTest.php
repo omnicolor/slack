@@ -63,7 +63,7 @@ final class FieldsTest extends TestCase
         self::expectExceptionMessage(
             'Fields object can only contain TextField objects',
         );
-        // @phpstan-ignore argument.type
+        // @phpstan-ignore argument.type, new.resultUnused
         new Fields(['Testing']);
     }
 }

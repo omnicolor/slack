@@ -12,6 +12,9 @@ use Omnicolor\Slack\Block;
 use Omnicolor\Slack\Response;
 use Override;
 
+use function assert;
+use function is_string;
+
 use const PHP_EOL;
 
 /**
@@ -49,6 +52,7 @@ class SlackException extends Exception implements JsonSerializable
      */
     public function render(): Response
     {
+        assert(is_string($this->message));
         if ('' === $this->message) {
             $this->message = 'You must include at least one command '
                 . 'argument.' . PHP_EOL
