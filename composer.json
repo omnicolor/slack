@@ -55,7 +55,7 @@
         ],
         "coverage": "XDEBUG_MODE=coverage phpunit --coverage-html=coverage",
         "lint": "parallel-lint --colors src tests",
-        "php-cs-fixer": "php-cs-fixer fix --dry-run --config=php_cs.php -v --diff",
+        "php-cs-fixer": "PHP_CS_FIXER_IGNORE_ENV=1 php-cs-fixer fix --dry-run --config=php_cs.php -v --diff",
         "phpcs": "phpcs -p --colors --cache",
         "phpstan": "phpstan analyze -v",
         "static": [
