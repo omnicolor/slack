@@ -6,7 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.9.2]
+## [0.9.3] - 2025-08-26
+
+### Changed
+
+- Lots of dependencies updated.
+
+## [0.9.2] - 2025-06-19
 
 ### Added
 
@@ -17,7 +23,7 @@ and this project adheres to
 - Lots of dependencies updated.
 - Upgraded from PHPStan 1 to PHPStan 2. ([#91](https://github.com/omnicolor/slack/pull/91))
 
-## [0.9.1]
+## [0.9.1] - 2025-03-18
 
 ### Added
 
@@ -27,7 +33,7 @@ and this project adheres to
 
 - Lots of dependencies updated.
 
-## [0.9.0]
+## [0.9.0] - 2025-02-28
 
 ### Added
 
