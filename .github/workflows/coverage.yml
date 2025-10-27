@@ -43,7 +43,7 @@ jobs:
         run: vendor/bin/phpunit --coverage-clover 'coverage/clover.xml'
 
       - name: Upload test coverage
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: ${{ matrix.php-version == '8.4' }}
         with:
           name: Test Coverage Report
