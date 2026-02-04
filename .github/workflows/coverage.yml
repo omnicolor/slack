@@ -49,7 +49,7 @@ jobs:
           path: ./coverage/
           overwrite: true
 
-      - name: "Comment coverage report"
+      - name: Comment coverage report
         uses: danhunsaker/clover-reporter-action@v0.2.17-clover
         if: ${{ matrix.php-version == '8.4' }}
         with:
