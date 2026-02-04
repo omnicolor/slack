@@ -11,6 +11,7 @@ and this project adheres to
 ### Changed
 
 - Lots of dependencies updated.
+- PHP 8.4 or higher is now required.
 
 ## [0.9.3] - 2025-08-26
 
