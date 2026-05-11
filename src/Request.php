@@ -14,7 +14,6 @@ use Omnicolor\Slack\ValueObjects\UserId;
 use RuntimeException;
 
 use function abs;
-use function assert;
 use function dirname;
 use function hash_equals;
 use function hash_hmac;
@@ -206,8 +205,8 @@ class Request
         }
 
         $base_string = implode(':', ['v0', $timestamp, $this->payload]);
+        /** @var string $secret */
         $secret = $_ENV['SLACK_SIGNING_SECRET'];
-        assert(is_string($secret));
         return hash_equals(
             $signature,
             hash_hmac('sha256', $base_string, $secret),
