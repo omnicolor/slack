@@ -77,35 +77,35 @@ final class RequestTest extends TestCase
     public function testInvalidAppId(): void
     {
         self::expectException(RuntimeException::class);
-        self::expectExceptionMessage('Invalid app id: 123456');
+        self::expectExceptionMessageIs('Invalid app id: 123456');
         new Request('api_app_id=123456');
     }
 
     public function testInvalidChannelId(): void
     {
         self::expectException(RuntimeException::class);
-        self::expectExceptionMessage('Invalid channel id: 123456');
+        self::expectExceptionMessageIs('Invalid channel id: 123456');
         new Request('channel_id=123456');
     }
 
     public function testInvalidEnterpriseId(): void
     {
         self::expectException(RuntimeException::class);
-        self::expectExceptionMessage('Invalid enterprise id: 123456');
+        self::expectExceptionMessageIs('Invalid enterprise id: 123456');
         new Request('enterprise_id=123456');
     }
 
     public function testInvalidTeamId(): void
     {
         self::expectException(RuntimeException::class);
-        self::expectExceptionMessage('Invalid team id: 123456');
+        self::expectExceptionMessageIs('Invalid team id: 123456');
         new Request('team_id=123456');
     }
 
     public function testInvalidUserId(): void
     {
         self::expectException(RuntimeException::class);
-        self::expectExceptionMessage('Invalid user id: 123456');
+        self::expectExceptionMessageIs('Invalid user id: 123456');
         new Request('user_id=123456');
     }
 
@@ -118,7 +118,7 @@ final class RequestTest extends TestCase
     public function testInvalidPayload(): void
     {
         self::expectException(RuntimeException::class);
-        self::expectExceptionMessage('Value must be a string or null');
+        self::expectExceptionMessageIs('Value must be a string or null');
         new Request('user_id[]=U123');
     }
 

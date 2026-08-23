@@ -50,7 +50,7 @@ final class OverflowMenuTest extends TestCase
     public function testConstructorWrongType(): void
     {
         self::expectException(UnexpectedValueException::class);
-        self::expectExceptionMessage(
+        self::expectExceptionMessageIs(
             'Options must be Subblock objects',
         );
         // @phpstan-ignore argument.type
