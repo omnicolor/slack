@@ -51,7 +51,7 @@ final class CheckboxesTest extends TestCase
     public function testConstructorWrongType(): void
     {
         self::expectException(UnexpectedValueException::class);
-        self::expectExceptionMessage('Options must be Subblock objects');
+        self::expectExceptionMessageIs('Options must be Subblock objects');
         // @phpstan-ignore argument.type
         new Checkboxes('text', 'action', ['Testing']);
     }

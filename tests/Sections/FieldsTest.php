@@ -60,7 +60,7 @@ final class FieldsTest extends TestCase
     public function testConstructorWrongType(): void
     {
         self::expectException(UnexpectedValueException::class);
-        self::expectExceptionMessage(
+        self::expectExceptionMessageIs(
             'Fields object can only contain TextField objects',
         );
         // @phpstan-ignore argument.type, new.resultUnused
