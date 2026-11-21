@@ -41,6 +41,7 @@ class SlackException extends Exception implements JsonSerializable
     #[Override]
     public function jsonSerialize(): array
     {
+        // @phpstan-ignore return.type
         return $this->render()->jsonSerialize();
     }
 
