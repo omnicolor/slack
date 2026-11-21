@@ -43,6 +43,7 @@
         "phpstan/phpstan-phpunit": "^2.0",
         "phpstan/phpstan-strict-rules": "^2.0",
         "phpunit/phpunit": "^13.3",
+        "phpwarden/phpwarden": "^1.0",
         "rector/rector": "^2.4",
         "roave/security-advisories": "dev-latest",
         "squizlabs/php_codesniffer": "^4.0"
@@ -61,11 +62,13 @@
         "php-cs-fixer-fix": "php-cs-fixer fix --config=php_cs.php -v --diff --allow-unsupported-php-version=yes",
         "phpcs": "phpcs -p --colors --cache",
         "phpstan": "phpstan analyze -v",
+        "phpwarden": "PHPWARDEN_NO_HINT=1 phpwarden scan",
         "rector": "rector --dry-run",
         "rector-fix": "rector",
         "static": [
             "@lint",
             "@phpstan",
+            "@phpwarden",
             "@rector"
         ],
         "style": [
@@ -79,6 +82,7 @@
         "coverage": "Run all tests and create a code coverage report in vendor/coverage",
         "lint": "Run lint across code to make sure it's syntactically valid",
         "phpstan": "Run PHPstan",
+        "phpwarden": "Run PHPWarden to scan for security issues",
         "rector": "Run Rector in dry run mode",
         "rector-fix": "Run Rector to fix code",
         "static": "Run static analysis (Lint and PHPStan)",
