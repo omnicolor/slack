@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Sections;
 
-use DateTimeImmutable;
+use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use Omnicolor\Slack\Sections\TimePicker;
 use PHPUnit\Framework\Attributes\Small;
 use PHPUnit\Framework\TestCase;
@@ -22,7 +23,7 @@ final class TimePickerTest extends TestCase
         self::assertSame(
             '{"type":"section","text":{"type":"mrkdwn","text":"Section text"},'
                 . '"accessory":{"type":"timepicker",'
-                . '"initial_time":"' . date('H:i') . '","placeholder":{'
+                . '"initial_time":"' . Carbon::now()->format('H:i') . '","placeholder":{'
                 . '"type":"plain_text","text":"Placeholder text","emoji":true},'
                 . '"action_id":"action_id"}}',
             (string)$picker,
@@ -35,7 +36,7 @@ final class TimePickerTest extends TestCase
             'Section text',
             'Placeholder text',
             'action_id',
-            new DateTimeImmutable('2024-04-01 13:37'),
+            CarbonImmutable::parse('2024-04-01 13:37'),
         );
         self::assertSame(
             '{"type":"section","text":{"type":"mrkdwn","text":"Section text"},'

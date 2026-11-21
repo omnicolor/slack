@@ -12,7 +12,7 @@ use function json_encode;
 
 use const PHP_EOL;
 
-class SlackExceptionTest extends TestCase
+final class SlackExceptionTest extends TestCase
 {
     public function testDefault(): void
     {

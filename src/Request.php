@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Omnicolor\Slack;
 
+use Carbon\Carbon;
+use Deprecated;
 use Dotenv\Dotenv;
 use League\Uri\Uri;
 use Omnicolor\Slack\ValueObjects\AppId;
@@ -20,7 +22,6 @@ use function hash_hmac;
 use function implode;
 use function is_string;
 use function parse_str;
-use function time;
 
 class Request
 {
@@ -130,46 +131,22 @@ class Request
         $this->trigger_id = $this->assertStringOrNull($properties['trigger_id'] ?? null);
 
         $team_id = $this->assertStringOrNull($properties['team_id'] ?? null);
-        if (null === $team_id) {
-            $this->team_id = null;
-        } else {
-            $this->team_id = new TeamId($team_id);
-        }
+        $this->team_id = null === $team_id ? null : new TeamId($team_id);
 
         $enterprise_id = $this->assertStringOrNull($properties['enterprise_id'] ?? null);
-        if (null === $enterprise_id) {
-            $this->enterprise_id = null;
-        } else {
-            $this->enterprise_id = new EnterpriseId($enterprise_id);
-        }
+        $this->enterprise_id = null === $enterprise_id ? null : new EnterpriseId($enterprise_id);
 
         $channel_id = $this->assertStringOrNull($properties['channel_id'] ?? null);
-        if (null === $channel_id) {
-            $this->channel_id = null;
-        } else {
-            $this->channel_id = new ChannelId($channel_id);
-        }
+        $this->channel_id = null === $channel_id ? null : new ChannelId($channel_id);
 
         $user_id = $this->assertStringOrNull($properties['user_id'] ?? null);
-        if (null === $user_id) {
-            $this->user_id = null;
-        } else {
-            $this->user_id = new UserId($user_id);
-        }
+        $this->user_id = null === $user_id ? null : new UserId($user_id);
 
         $url = $this->assertStringOrNull($properties['response_url'] ?? null);
-        if (null === $url) {
-            $this->response_url = null;
-        } else {
-            $this->response_url = Uri::new($url);
-        }
+        $this->response_url = null === $url ? null : Uri::new($url);
 
         $app_id = $this->assertStringOrNull($properties['api_app_id'] ?? null);
-        if (null === $app_id) {
-            $this->app_id = null;
-        } else {
-            $this->app_id = new AppId($app_id);
-        }
+        $this->app_id = null === $app_id ? null : new AppId($app_id);
 
         if (!isset($properties['is_enterprise_install'])) {
             $this->is_enterprise_install = null;
@@ -200,7 +177,7 @@ class Request
         $dotenv->load();
         $dotenv->required(['SLACK_SIGNING_SECRET'])->notEmpty();
 
-        if (abs($timestamp - time()) > self::FIVE_MINUTES) {
+        if (abs($timestamp - Carbon::now()->getTimestamp()) > self::FIVE_MINUTES) {
             return false;
         }
 
@@ -213,9 +190,7 @@ class Request
         );
     }
 
-    /**
-     * @deprecated
-     */
+    #[Deprecated]
     public function verifyToken(string $token): bool
     {
         return $this->token === $token;

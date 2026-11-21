@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Omnicolor\Slack\Sections;
 
-use DateTimeImmutable;
+use Carbon\CarbonImmutable;
 use DateTimeInterface;
 use JsonSerializable;
 use Omnicolor\Slack\Block;
@@ -43,11 +43,7 @@ class DatePicker extends Block implements JsonSerializable, Stringable
         ?DateTimeInterface $initial_date = null,
         protected bool $emoji = true,
     ) {
-        if (null === $initial_date) {
-            $this->initial_date = new DateTimeImmutable();
-        } else {
-            $this->initial_date = $initial_date;
-        }
+        $this->initial_date = $initial_date ?? CarbonImmutable::now();
     }
 
     /**
