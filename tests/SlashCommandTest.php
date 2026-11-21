@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests;
 
+use Carbon\Carbon;
 use Omnicolor\Slack\SlashCommand;
 use PHPUnit\Framework\Attributes\Small;
 use PHPUnit\Framework\TestCase;
@@ -11,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 #[Small]
 final class SlashCommandTest extends TestCase
 {
-    protected SlashCommand $command;
+    private SlashCommand $command;
 
     public function setUp(): void
     {
@@ -88,9 +89,9 @@ final class SlashCommandTest extends TestCase
 
     public function testValidateTimestamp(): void
     {
-        self::assertTrue($this->command->validateTimestamp(time()));
-        self::assertFalse($this->command->validateTimestamp(time() - 301));
-        self::assertFalse($this->command->validateTimestamp(time() + 301));
+        self::assertTrue($this->command->validateTimestamp(Carbon::now()->getTimestamp()));
+        self::assertFalse($this->command->validateTimestamp(Carbon::now()->subSeconds(301)->getTimestamp()));
+        self::assertFalse($this->command->validateTimestamp(Carbon::now()->getTimestamp() + 301));
     }
 
     public function testEnterprise(): void

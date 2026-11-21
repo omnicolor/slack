@@ -33,7 +33,7 @@ trait HasOptions
 
     public function addOptions(Subblock ...$options): self
     {
-        $this->options = $this->options + array_values($options);
+        $this->options += array_values($options);
         return $this;
     }
 }

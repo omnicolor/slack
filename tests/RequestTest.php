@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace Tests;
 
+use Carbon\Carbon;
 use Omnicolor\Slack\Request;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
 use function file_exists;
-use function strtotime;
-use function time;
 
 final class RequestTest extends TestCase
 {
@@ -127,7 +126,7 @@ final class RequestTest extends TestCase
         if (!file_exists('.env')) {
             self::markTestSkipped('.env file not found');
         }
-        self::assertFalse((new Request(''))->verify(time(), 'a'));
+        self::assertFalse((new Request(''))->verify(Carbon::now()->getTimestamp(), 'a'));
     }
 
     public function testVerifyTooOld(): void
@@ -135,7 +134,7 @@ final class RequestTest extends TestCase
         if (!file_exists('.env')) {
             self::markTestSkipped('.env file not found');
         }
-        $time = strtotime('-60 minutes');
+        $time = Carbon::parse('-60 minutes')->getTimestamp();
         $payload = 'this+is+a+payload';
         $signature = hash_hmac(
             'sha256',
@@ -151,7 +150,7 @@ final class RequestTest extends TestCase
         if (!file_exists('.env')) {
             self::markTestSkipped('.env file not found');
         }
-        $time = strtotime('+60 minutes');
+        $time = Carbon::parse('+60 minutes')->getTimestamp();
         $payload = 'this+is+a+payload';
         $signature = hash_hmac(
             'sha256',
@@ -168,7 +167,7 @@ final class RequestTest extends TestCase
             self::markTestSkipped('.env file not found');
         }
 
-        $time = time();
+        $time = Carbon::now()->getTimestamp();
         $payload = 'this+is+a+payload';
         $signature = hash_hmac(
             'sha256',

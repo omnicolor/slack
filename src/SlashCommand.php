@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Omnicolor\Slack;
 
+use Carbon\Carbon;
 use League\Uri\Uri;
 
 use function abs;
 use function hash_equals;
 use function hash_hmac;
 use function implode;
-use function time;
 
 /**
  * @psalm-api
@@ -173,6 +173,6 @@ class SlashCommand
      */
     public function validateTimestamp(int $timestamp): bool
     {
-        return abs(time() - $timestamp) < 60 * 5;
+        return abs(Carbon::now()->getTimestamp() - $timestamp) < 60 * 5;
     }
 }
