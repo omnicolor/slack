@@ -46,7 +46,7 @@ class Fields extends Block implements JsonSerializable, Stringable
 
     public function addFields(TextField ...$fields): self
     {
-        $this->fields = $this->fields + array_values($fields);
+        $this->fields += array_values($fields);
         return $this;
     }
 

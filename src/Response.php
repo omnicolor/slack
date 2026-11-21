@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Omnicolor\Slack;
 
+use Deprecated;
 use JsonSerializable;
 use Override;
 
@@ -25,8 +26,8 @@ class Response implements JsonSerializable
     /**
      * Attachments have been deprecated. However, there's no way in blocks to
      * include the color next to the message.
-     * @deprecated See https://api.slack.com/reference/surfaces/formatting#when-to-use-attachments
      */
+    #[Deprecated(message: 'See https://api.slack.com/reference/surfaces/formatting#when-to-use-attachments')]
     public function addAttachment(Attachment $attachment): self
     {
         $this->attachments[] = $attachment;
@@ -72,7 +73,7 @@ class Response implements JsonSerializable
             'blocks' => $blocks,
             'response_type' => $this->type->value,
         ];
-        if (0 !== count($this->attachments)) {
+        if ([] !== $this->attachments) {
             $self['attachments'] = [];
             foreach ($this->attachments as $attachment) {
                 $self['attachments'][] = $attachment->jsonSerialize();
